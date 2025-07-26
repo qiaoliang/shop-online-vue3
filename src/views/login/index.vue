@@ -151,7 +151,7 @@ function onSubmit() {
     .login({ provider: unref(loginType), params })
     .then(() => {
       submitLoading.value = false;
-      route.query.redirect ? router.replace({ path: route.query.redirect as string }) : router.replace({ path: '/' });
+      router.replace({ path: '/' }); // 无条件跳转首页
       Toast.success('登录成功');
     })
     .catch((error) => {
