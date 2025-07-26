@@ -21,6 +21,16 @@ else
     exit 1
 fi
 
+echo "正在删除旧的构建文件..."
+rm -rf dist
+
+if [ $? -eq 0 ]; then
+    echo "旧构建文件删除成功"
+else
+    echo "旧构建文件删除失败"
+    exit 1
+fi
+
 echo "正在构建项目..."
 pnpm build
 
