@@ -125,10 +125,26 @@ export function userModifyPwd(data?: Recordable) {
  * 添加收货地址
  */
 export function userShoppingAddressAdd(data?: Recordable) {
+  console.log('添加收货地址的数据:', JSON.stringify(data, null, 2)); // 添加调试打印语句
+  // 验证数据格式是否符合要求
+  const expectedFormat = {
+    linkMan: data?.linkMan || '收货人姓名',
+    mobile: data?.mobile || '手机号码',
+    provinceId: data?.provinceId || '省份',
+    cityId: data?.cityId || '城市',
+    districtId: data?.districtId || '区县',
+    address: data?.address || '详细地址',
+    isDefault: data?.isDefault !== undefined ? data.isDefault : false
+  };
+  console.log('期望的数据格式:', JSON.stringify(expectedFormat, null, 2));
+
   return defRequest({
     url: `/user/shipping-address/add`,
     method: 'post',
     data,
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
 }
 
@@ -171,7 +187,7 @@ export function userShoppingAddressDetail(data?: Recordable) {
 export function userShoppingAddressList(data?: Recordable) {
   return defRequest({
     url: `/user/shipping-address/list`,
-    method: 'post',
+    method: 'get',
     data,
   });
 }

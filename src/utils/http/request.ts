@@ -16,12 +16,21 @@ function createRequest<T = ServiceResult>(config: AxiosRequestConfig): Promise<T
     timeout: 1000 * 5,
     transformRequest: [
       (data, headers) => {
+        const userStore = useUserStoreWithOut();
+
+        // 如果是 FormData，直接返回
         if (headers['Content-Type']?.includes('form-data')) {
           return data;
-        } else {
-          const userStore = useUserStoreWithOut();
-          return qs.stringify({ ...data, token: userStore.getToken }); // 序列化请求参数
         }
+
+        // 如果是 JSON 格式，添加 token 到数据中
+        if (headers['Content-Type']?.includes('application/json')) {
+          const jsonData = { ...data, token: userStore.getToken };
+          return JSON.stringify(jsonData);
+        }
+
+        // 默认使用表单格式（qs.stringify）
+        return qs.stringify({ ...data, token: userStore.getToken });
       },
     ],
   });
