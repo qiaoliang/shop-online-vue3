@@ -137,7 +137,7 @@ export function userShoppingAddressAdd(data?: Recordable) {
  */
 export function userShoppingAddressDefault(data?: Recordable) {
   return defRequest({
-    url: `/user/shipping-address/default/v2`,
+    url: `/user/shipping-address/default`,
     method: 'get',
     params: data,
   });
@@ -159,7 +159,7 @@ export function userShoppingAddressDelete(data?: Recordable) {
  */
 export function userShoppingAddressDetail(data?: Recordable) {
   return defRequest({
-    url: `/user/shipping-address/detail/v2`,
+    url: `/user/shipping-address/detail`,
     method: 'get',
     params: data,
   });
@@ -170,7 +170,7 @@ export function userShoppingAddressDetail(data?: Recordable) {
  */
 export function userShoppingAddressList(data?: Recordable) {
   return defRequest({
-    url: `/user/shipping-address/list/v2`,
+    url: `/user/shipping-address/list`,
     method: 'post',
     data,
   });
